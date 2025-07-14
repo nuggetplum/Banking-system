@@ -5,14 +5,13 @@ name: ci-test
 
 on:
   push:
-    branches: [ "main" ]
+    branches: ["main"]
   pull_request:
-    branches: [ "main" ]
+    branches: ["main"]
 
 jobs:
-
   test:
-    name : Test
+    name: Test
     runs-on: ubuntu-latest
 
     # Service containers to run with `container-job`
@@ -26,7 +25,6 @@ jobs:
           POSTGRES_USER: root
           POSTGRES_PASSWORD: secret
           POSTGRES_DB: simple_bank
-
         ports:
           # Maps tcp port 5432 on service container to the host
           - 5432:5432
@@ -37,22 +35,19 @@ jobs:
           --health-timeout 5s
           --health-retries 5
 
-
     steps:
-     -uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
-     -name: Set up Go
-    uses: actions/setup-go@v4
-    with:
-        go-version: '1.20'
+      - name: Set up Go
+        uses: actions/setup-go@v4
+        with:
+          go-version: '1.20'
 
-    #uses : actionslkasflsd
+      - name: Install golang-goose
+        run: go install github.com/pressly/goose/v3/cmd/goose@latest
 
-    -name : Install golang-goose
-    run : go install github.com/pressly/goose/v3/cmd/goose@latest
+      - name: Run migrations
+        run: goose postgres postgresql://root:secret@localhost:5432/simple_bank up
 
-    -name : Run migrations
-    run : goose postgres postgresql://root:secret@localhost:5432/simple_bank up
-
-    -name: Test
-    run: go test -v ./...
+      - name: Test
+        run: go test -v ./...
