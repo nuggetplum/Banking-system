@@ -11,8 +11,14 @@ dropdb:
 migrateup:
 		goose postgres postgresql://root:secret@localhost:5432/simple_bank up
 
+migrateup1:
+		goose postgres postgresql://root:secret@localhost:5432/simple_bank up 1
+
 migratedown:
 		goose postgres postgresql://root:secret@localhost:5432/simple_bank down
+
+migratedown1:
+		goose postgres postgresql://root:secret@localhost:5432/simple_bank down 1
 
 sqlc:
 	sqlc generate
