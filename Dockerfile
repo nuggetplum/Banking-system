@@ -14,11 +14,12 @@ COPY --from=builder /app/main .
 COPY --from=builder /go/bin/goose ./goose
 COPY app.env .
 COPY start.sh .
+RUN chmod +x /app/start.sh
 COPY db/migration ./migration
 
 
 
 
 EXPOSE 8080
-CMD [ "/app/main" ]
 ENTRYPOINT [ "/app/start.sh"]
+CMD [ "/app/main" ]
