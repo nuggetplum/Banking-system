@@ -5,6 +5,9 @@ postgres:
 createdb:
 		docker exec -it postgres17 /bin/sh createdb --username=root --owner=root simple_bank 
 
+goose create:
+		goose create  name sql
+
 dropdb:
 		docker exec -it postgres17 /bin/sh dropdb simple_bank
 

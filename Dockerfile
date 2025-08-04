@@ -14,6 +14,7 @@ COPY --from=builder /app/main .
 COPY --from=builder /go/bin/goose ./goose
 COPY app.env .
 COPY start.sh .
+COPY wait-for.sh .
 RUN chmod +x /app/start.sh
 COPY db/migration ./migration
 
