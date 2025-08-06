@@ -1,0 +1,21 @@
+evans> show package
+evans> package pb
+evans> show service
+evans> service SimpleBank
+evans> show rpc
+
+# Install Evans if you haven't
+go install github.com/ktr0731/evans@latest
+
+# Connect to your server
+evans --host localhost --port 9090 -r repl
+
+# Ubuntu/Debian
+sudo apt-get install grpcurl
+
+# macOS with Homebrew
+brew install grpcurl
+
+# Or download binary from GitHub releases
+
+go install github.com/fullstorydev/grpcurl/cmd/grpcurl@latest
